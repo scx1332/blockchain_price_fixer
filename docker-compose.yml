@@ -1,0 +1,18 @@
+version: "3.3"  # optional since v1.27.0
+services:
+  fixer:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - DEV_PROVIDER=${DEV_PROVIDER}
+      - DEV_PRIVATE_KEY=${DEV_PRIVATE_KEY}
+      - DEV_CHAIN_ID=${DEV_CHAIN_ID}
+      - CHANGE_TARGET_EVERY_SECONDS=${CHANGE_TARGET_EVERY_SECONDS}
+      - LOWER_TARGET_GWEI=${LOWER_TARGET_GWEI}
+      - HIGHEST_TARGET_GWEI=${HIGHEST_TARGET_GWEI}
+    ports:
+      - ${BACKEND_PORT}:7888
+volumes:
+  mongo_vol:
+ 

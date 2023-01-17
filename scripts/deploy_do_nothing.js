@@ -48,6 +48,10 @@ async function main() {
   const BLOCK_GAS_CHANGE = 0.125;
   const AVERAGE_BLOCK_TIME = 5;
 
+  const CHANGE_TARGET_EVERY_SECONDS = parseFloat(process.env.CHANGE_TARGET_EVERY_SECONDS || "60.0");
+  const LOWER_TARGET_GWEI = parseFloat(process.env.LOWER_TARGET_GWEI || "1.5");
+  const HIGHEST_TARGET_GWEI = parseFloat(process.env.HIGHEST_TARGET_GWEI || "76.0");
+
   let targetGasPrice = 1 * 1000000000;
 
   let lastCheckDate = new Date();
@@ -55,9 +59,10 @@ async function main() {
   while (true) {
     //check time from lastCheckDate
     let now = new Date();
-    if (now - lastTargetChange > 1000 * 60 * 5) {
-      targetGasPrice = 1000000000 + Math.random() * 1000 * 1000000000;
+    if (now - lastTargetChange > 1000 * CHANGE_TARGET_EVERY_SECONDS) {
+      targetGasPrice = LOWER_TARGET_GWEI * 1000000000 + Math.random() * (HIGHEST_TARGET_GWEI - LOWER_TARGET_GWEI) * 1000000000;
       lastTargetChange = now;
+      console.log(`Target gas price changed to ${formatToGwei(targetGasPrice)}`);
     }
     if (now - lastCheckDate > 1000) {
       lastCheckDate = now;
