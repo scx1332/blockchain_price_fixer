@@ -44,7 +44,7 @@ async function main() {
 
   const BLOCK_GAS_LIMIT = 30000000;
   const BLOCK_GAS_AVG = BLOCK_GAS_LIMIT / 2;
-  const BLOCK_GAS_MAX_TX = BLOCK_GAS_LIMIT - 200000;
+  const BLOCK_GAS_MAX_TX = BLOCK_GAS_LIMIT - 20000;
   const BLOCK_GAS_CHANGE = 0.125;
   const AVERAGE_BLOCK_TIME = 5;
 
@@ -107,7 +107,7 @@ async function main() {
       console.log("Gas price", transactionGasPrice);
       await dncFactory.costlyTransaction(loops, 0, {
         gasPrice: transactionGasPrice,
-        gasLimit: targetGas + 90000
+        gasLimit: targetGas + 19000
       });
       console.log(`Costly transaction sent: Gas: ${targetGas}, loops: ${loops}`);
     }
