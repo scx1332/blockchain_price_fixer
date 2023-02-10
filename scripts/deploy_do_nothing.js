@@ -105,10 +105,10 @@ async function main() {
       const loops = Math.max(1, Math.floor((targetGas - 22500) / 207));
       let transactionGasPrice = Math.round((1 + BLOCK_GAS_CHANGE) * targetGasPrice + 1100000000);
       console.log("Gas price", transactionGasPrice);
-      await dncFactory.costlyTransaction(loops, 0, {
+      await Promise.all([dncFactory.costlyTransaction(loops, 0, {
         gasPrice: transactionGasPrice,
         gasLimit: targetGas + 19000
-      });
+      }), new Promise(resolve => setTimeout(resolve, 10000))]);
       console.log(`Costly transaction sent: Gas: ${targetGas}, loops: ${loops}`);
     }
     catch (e) {
