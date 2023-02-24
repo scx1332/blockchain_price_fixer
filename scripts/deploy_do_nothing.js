@@ -108,8 +108,8 @@ async function main() {
       await Promise.all([dncFactory.costlyTransaction(loops, 0, {
         gasPrice: transactionGasPrice,
         gasLimit: targetGas + 19000
-      }), new Promise(resolve => setTimeout(resolve, 10000))]);
-      console.log(`Costly transaction sent: Gas: ${targetGas}, loops: ${loops}`);
+      }), new Promise(resolve => setTimeout(resolve, 2000))]);
+      console.log(`Costly transaction probably sent: Gas: ${targetGas}, loops: ${loops}`);
     }
     catch (e) {
       console.error(e);
